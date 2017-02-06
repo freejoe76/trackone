@@ -12,6 +12,17 @@ if ( isset($_GET['track']) ):
 	$rows = $t->query_table();
 endif;
 
+// Get a list of the databases for the homepage
+$dbs = array();
+if ( $track == 'One' ):
+	foreach ( glob('./*.*') as $file ):
+		if ( strpos($file, '.db') > 0 ):
+			$dbs[] = str_replace('./', '', str_replace('.db', '', $file));
+		endif;
+	endforeach;
+endif;
+
+
 ?><!DOCTYPE HTML>
 <html>
 <head>
@@ -24,6 +35,15 @@ endif;
 </head>
 <body>
 	<h1>Track <?php echo $name; ?> Thing</h1>
-
+	<?php if ( count($dbs) > 0 ): ?>
+	<h2>Currently tracking</h2>
+	<?php foreach ( $dbs as $db ): 
+	echo '<h3>' . make_name($db) . '</h3>';
+	$t = new TrackOne($db);
+	$rows = $t->query_table();
+	echo '<p>' . count($rows) . ' entries.</p>';
+	endforeach;
+	endif;
+	?>
 </body>
 </html>
