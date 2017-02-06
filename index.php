@@ -1,19 +1,44 @@
 <?php
 include('sqlite.class.php');
 
-$t = 'test';
-$db = new SQLite($t . '.db');
-$sql = "CREATE TABLE IF NOT EXISTS $t(id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE);";
-$db->prepare($t, $sql);
-$db->execute($t);
+function create_table($t)
+{
+	$db_name = $t . '.db';
+	$db = new SQLite($db_name);
+	$sql = "CREATE TABLE IF NOT EXISTS $t(id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE);";
+	$db->prepare($db_name, $sql);
+	$db->execute($db_name);
+	return true;
+}
+function record_item($t)
+{
+	$db_name = $t . '.db';
+	$db = new SQLite($db_name);
+	$sql = "INSERT INTO $t(date) VALUES (date('now'));";
+	$db->prepare($db_name, $sql);
+	$db->execute($db_name);
+	return true;
+}
+function make_name($input)
+{
+	return ucwords(str_replace('_', ' ', $input));
+}
 
+$track = 'One';
+if ( isset($_GET['track']) ):
+	$track = htmlspecialchars($_GET['track']);
+	$name = make_name($track);
+	create_table($track);
+	record_item($track);
+endif;
 
 ?>
 <!DOCTYPE HTML>
 <html>
 <head>
+	<title><?php echo $name; ?></title>
 </head>
 <body>
-	<h1>Track One Thing</h1>
+	<h1>Track <?php echo $name; ?> Thing</h1>
 </body>
 </html>
