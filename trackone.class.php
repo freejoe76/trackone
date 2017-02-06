@@ -34,5 +34,9 @@ class TrackOne
 		$this->db->execute($this->db_name);
 		return $this->db->fetch($this->db_name);
 	}
-		
+}
+
+function make_name($input)
+{
+	return ucwords(str_replace('_', ' ', $input));
 }

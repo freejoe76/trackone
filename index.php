@@ -1,10 +1,6 @@
 <?php
 include('trackone.class.php');
 
-function make_name($input)
-{
-	return ucwords(str_replace('_', ' ', $input));
-}
 $track = 'One';
 $name = 'One';
 if ( isset($_GET['track']) ):

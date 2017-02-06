@@ -1,3 +1,2 @@
 RewriteEngine On
-#RewriteBase .
 RewriteRule ^([_0-9a-zA-Z-]+)/ index.php?track=$1 [L]
