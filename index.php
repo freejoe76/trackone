@@ -22,6 +22,7 @@ endif;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="http://cdn.foundation5.zurb.com/foundation.css">
+	<?php if ( $track !== 'One' ): ?> <meta http-equiv="refresh" content="2; URL='../'"><?php endif; ?>
 
 </head>
 <body>
