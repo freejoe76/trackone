@@ -1,0 +1,2 @@
+# Track One
+A tiny php & sqlite app designed to track how many times something happens. Each visit in a browser to path/to/project-root/[any-string]/ will create a database for [any-string] and make a record of the date in it. Is that clear? That might not be clear. Basically: I wanted to track how many times I rode the subway in a given month, so I built something that I could use my phone to track. All I have to do is open a URL every subway ride.
