@@ -26,4 +26,13 @@ class TrackOne
 		$this->db->execute($this->db_name);
 		return true;
 	}
+
+	public function query_table()
+	{
+		$sql = "SELECT * FROM $this->table;";
+		$this->db->prepare($this->db_name, $sql);
+		$this->db->execute($this->db_name);
+		return $this->db->fetch($this->db_name);
+	}
+		
 }
