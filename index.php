@@ -32,11 +32,14 @@ if ( isset($_GET['track']) ):
 	record_item($track);
 endif;
 
-?>
-<!DOCTYPE HTML>
+?><!DOCTYPE HTML>
 <html>
 <head>
 	<title><?php echo $name; ?></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="http://cdn.foundation5.zurb.com/foundation.css">
+
 </head>
 <body>
 	<h1>Track <?php echo $name; ?> Thing</h1>
