@@ -45,7 +45,7 @@ endif;
 	$count = count($rows);
 	$s = 's';
 	if ( $count == 1 ) $s = '';
-	echo '<p>' . $count . ' time' . $s . '.</p>';
+	echo '<p>' . $count . ' time' . $s . ', last updated ' . make_date($rows[$count - 1]['date']) . '</p>';
 	endforeach;
 	endif;
 	?>

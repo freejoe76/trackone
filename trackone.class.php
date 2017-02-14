@@ -40,3 +40,13 @@ function make_name($input)
 {
 	return ucwords(str_replace('_', ' ', $input));
 }
+function make_date($datestamp, $format='weekmonthday')
+{
+	// If it's today, just return 'today'
+	if ( $datestamp == date('Y-m-d') ) return 'today';
+
+	$formats = array(
+		'weekmonthday' => '%A %b. %e'
+	);
+	return strftime($formats[$format], $datestamp);
+}
