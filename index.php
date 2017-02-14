@@ -3,12 +3,14 @@ include('trackone.class.php');
 
 $track = 'One';
 $name = 'One';
+$details = 0;
+if ( isset($_GET['details']) ) $details = 1;
 if ( isset($_GET['track']) ):
 	$track = htmlspecialchars(str_replace('-', '_', $_GET['track']));
 	$name = make_name($track);
 	$t = new TrackOne($track);
 	$t->create_table();
-	$t->add_record();
+	if ( $details == 0 ) $t->add_record();
 	$rows = $t->query_table();
 endif;
 
@@ -22,7 +24,6 @@ if ( $track == 'One' ):
 	endforeach;
 endif;
 
-
 ?><!DOCTYPE HTML>
 <html>
 <head>
@@ -30,7 +31,7 @@ endif;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="http://cdn.foundation5.zurb.com/foundation.css">
-	<?php if ( $track !== 'One' ): ?> <meta http-equiv="refresh" content="2; URL='../'"><?php endif; ?>
+	<?php if ( $track !== 'One' && $details == 0 ): ?> <meta http-equiv="refresh" content="2; URL='../'"><?php endif; ?>
 
 </head>
 <body>
@@ -38,10 +39,13 @@ endif;
 	<?php if ( count($dbs) > 0 ): ?>
 	<h2>Currently tracking</h2>
 	<?php foreach ( $dbs as $db ): 
-	echo '<h3>' . make_name($db) . '</h3>';
+	echo '<h3><a href="' . $db . '/details/">' . make_name($db) . '</a></h3>';
 	$t = new TrackOne($db);
 	$rows = $t->query_table();
-	echo '<p>' . count($rows) . ' entries.</p>';
+	$count = count($rows);
+	$s = 's';
+	if ( $count == 1 ) $s = '';
+	echo '<p>' . $count . ' time' . $s . '.</p>';
 	endforeach;
 	endif;
 	?>
